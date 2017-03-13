@@ -1,4 +1,8 @@
 <?php
+    /*
+     * Contains functions to query and insert into database
+     */    
+
     // read contents of the configuration file
     $contents = file_get_contents("../config.json");
 
