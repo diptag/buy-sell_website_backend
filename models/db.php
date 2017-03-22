@@ -9,7 +9,8 @@
     // decode json file
     $config = json_decode($contents, true);
 
-    // connect to databse
+    // connect to database
+    $dbh;
     try
     {
         $dbh = new PDO("mysql:host=".$config["database"]["host"].";dbname=".$config["database"]["name"], 
@@ -21,7 +22,7 @@
     }
 
     // create get user details function
-    function get_usr($email)
+    function get_usr($dbh, $email)
     {
         // prepare sql query
         $usr = $dbh->prepare("SELECT * FROM users WHERE email = :email");
@@ -38,10 +39,10 @@
     }
 
     // create register user function
-    function register_usr($email, $name, $college, $pwd)
+    function register_usr($dbh, $email, $name, $college, $pwd)
     {
         // prepare sql statement
-        $query = $dbh->prepare("INSERT INTO users (email, name, institute, hash) VALUES (:email, :name, :college, :hash)");
+        $query = $dbh->prepare("INSERT INTO users (email, name, college_id, hash) VALUES (:email, :name, :college, :hash)");
 
         // create hash from password
         $hash = password_hash($pwd, PASSWORD_DEFAULT);
@@ -60,5 +61,13 @@
             return true;
         else
             return false;
+    }
+    
+    // function to get list of all colleges from the database
+    function get_colleges($dbh) 
+    {
+        $clgs = $dbh->query("SELECT * FROM colleges");
+        $colleges = $clgs->fetchAll(PDO::FETCH_ASSOC);
+        return $colleges;
     }
 ?>
