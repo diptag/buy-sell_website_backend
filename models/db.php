@@ -38,10 +38,10 @@
     }
 
     // create register user function
-    function register_usr($email, $name, $institute, $pwd)
+    function register_usr($email, $name, $college, $pwd)
     {
         // prepare sql statement
-        $query = $dbh->prepare("INSERT INTO users (email, name, institute, hash) VALUES (:email, :name, :institute, :hash)");
+        $query = $dbh->prepare("INSERT INTO users (email, name, institute, hash) VALUES (:email, :name, :college, :hash)");
 
         // create hash from password
         $hash = password_hash($pwd, PASSWORD_DEFAULT);
@@ -49,7 +49,7 @@
         // bind parameters to the query
         $query->bindParam(":email", $email);
         $query->bindParam(":name", $name);
-        $query->bindParam(":institute", $institute); 
+        $query->bindParam(":college", $college); 
         $query->bindParam(":hash", $hash);
 
         // execute query
