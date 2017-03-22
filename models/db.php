@@ -10,8 +10,15 @@
     $config = json_decode($contents, true);
 
     // connect to databse
-    $dbh = new PDO("mysql:host=".$config["database"]["host"].";dbname=".$config["database"]["name"], 
+    try
+    {
+        $dbh = new PDO("mysql:host=".$config["database"]["host"].";dbname=".$config["database"]["name"], 
         $config["database"]["username"], $config["database"]["password"]);
+    }
+    catch( PDOException $e)
+    {
+        
+    }
 
     // create get user details function
     function get_usr($email)
@@ -24,7 +31,7 @@
         $usr->execute();
 
         // extract user data 
-        $rows = $usr->fetchAll(PDO::FETCH_ASSOC);
+        $rows = $usr->fetch(PDO::FETCH_ASSOC);
 
         // return user data
         return $rows;
