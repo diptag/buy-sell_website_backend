@@ -15,4 +15,12 @@
         require(__DIR__."/../../views/footer.php");
         exit;
     }
+    
+    // redirect to the page passed as argument
+    function redirect ($location)
+    {
+        // send location header
+        header("Location: {$location}");
+        exit;
+    }
 ?>
