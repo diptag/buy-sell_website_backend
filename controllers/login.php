@@ -23,8 +23,9 @@
             // check if password is correct
             if (password_verify($_POST ["password"], $user["hash"]))
             {
-                // remember that user is logged in by upadating user's id in session
+                // remember that user is logged in by upadating user's id and namein session
                 $_SESSION["id"] = $user["id"];
+                $_SESSION["name"] = $user["name"];
                 
                 // redirect to main.php
                 redirect("/");
