@@ -1,0 +1,23 @@
+/* CSS Document */
+#items-display {
+	position: absolute;
+	width: 100%;
+	height: 90%;
+}
+
+#categories {
+	width: 20%;
+	height: 80%;
+	float: left;
+}
+
+.items {
+	width: 25%;
+	height: 50%;
+	float: right;
+}
+
+#categories, .items {
+	position: relative;
+	border: thin solid #000000;
+}
