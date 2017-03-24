@@ -1,6 +1,6 @@
 <?php
     // configuration
-    require("../controllers/includes/config.php");
+    require("../includes/config.php");
 
     // check which controller to use
     if (isset($_GET["url"]))
