@@ -4,5 +4,5 @@
     
     //requirements
     require("helpers.php");
-    require(__DIR__."/../../models/db.php");
+    require(__DIR__."/../models/db.php");
 ?>

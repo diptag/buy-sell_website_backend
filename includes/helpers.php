@@ -10,9 +10,9 @@
         extract($values);
 
         // render views between header and footer
-        require(__DIR__."/../../views/header.php");
-        require(__DIR__."/../../views/".$view.".php");
-        require(__DIR__."/../../views/footer.php");
+        require(__DIR__."/../views/header.php");
+        require(__DIR__."/../views/".$view.".php");
+        require(__DIR__."/../views/footer.php");
         exit;
     }
     
