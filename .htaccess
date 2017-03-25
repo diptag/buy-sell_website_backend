@@ -2,6 +2,8 @@
     RewriteEngine on
 
     RewriteBase /
+
+    # Will automatically redirect files to public directory
     RewriteRule    ^$    public/    [L]
     RewriteRule    (.*) public/$1    [L]
 </IfModule>
