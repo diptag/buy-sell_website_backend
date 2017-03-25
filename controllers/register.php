@@ -24,10 +24,10 @@
         }
         
         // check if email is already registered and register user
-        if (register_usr($dbh, $_POST["email"], $_POST["name"], $_POST["college"], $_POST["password"]))
+        if (register_usr($_POST["email"], $_POST["name"], $_POST["college"], $_POST["password"]))
         {
             // store user id and name in session variable
-            $user = get_usr($dbh, $_POST["email"]);
+            $user = get_usr($_POST["email"]);
             $_SESSION["id"] = $user["id"];
             $_SESSION["name"] = $user["name"];
             

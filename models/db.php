@@ -10,7 +10,6 @@
     $config = json_decode($contents, true);
 
     // connect to database
-    $dbh;
     try
     {
         $dbh = new PDO("mysql:host=".$config["database"]["host"].";dbname=".$config["database"]["name"], 
@@ -22,8 +21,11 @@
     }
 
     // create get user details function
-    function get_usr($dbh, $email)
+    function get_usr($email)
     {
+        // get databse connection handler form $GLOBALS
+        $dbh = $GLOBALS["dbh"];
+
         // prepare sql query
         $usr = $dbh->prepare("SELECT * FROM users WHERE email = :email");
 
@@ -39,8 +41,11 @@
     }
 
     // create register user function
-    function register_usr($dbh, $email, $name, $college, $pwd)
+    function register_usr($email, $name, $college, $pwd)
     {
+        // get databse connection handler form $GLOBALS
+        $dbh = $GLOBALS["dbh"];
+
         // prepare sql statement
         $query = $dbh->prepare("INSERT INTO users (email, name, college_id, hash) VALUES (:email, :name, :college, :hash)");
 
@@ -64,10 +69,25 @@
     }
     
     // function to get list of all colleges from the database
-    function get_colleges($dbh) 
+    function get_colleges() 
     {
+        // get databse connection handler form $GLOBALS
+        $dbh = $GLOBALS["dbh"];
+
         $clgs = $dbh->query("SELECT * FROM colleges");
         $colleges = $clgs->fetchAll(PDO::FETCH_ASSOC);
         return $colleges;
     }
+
+    // function to get all the categories form the database
+    function get_categories()
+    {
+        // get databse connection handler form $GLOBALS
+        $dbh = $GLOBALS["dbh"];
+
+        $result = $dbh->query("SELECT * FROM categories");
+        $categories = fetch_All(PDO::FETCH_ASSOC);
+        return $categories;
+    }
+
 ?>

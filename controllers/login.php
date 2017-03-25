@@ -15,7 +15,7 @@
         }
         
         // query database for the user
-        $user = get_usr($dbh, $_POST["email"]);
+        $user = get_usr($_POST["email"]);
         
         // if user doesn't exists in database
         if ($user["id"] !== null)
