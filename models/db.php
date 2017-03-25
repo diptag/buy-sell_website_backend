@@ -43,7 +43,6 @@
     // create register user function
     function register_usr($email, $name, $college, $pwd)
     {
-        // get databse connection handler form $GLOBALS
         $dbh = $GLOBALS["dbh"];
 
         // prepare sql statement
@@ -71,7 +70,6 @@
     // function to get list of all colleges from the database
     function get_colleges() 
     {
-        // get databse connection handler form $GLOBALS
         $dbh = $GLOBALS["dbh"];
 
         $clgs = $dbh->query("SELECT * FROM colleges");
@@ -82,7 +80,6 @@
     // function to get all the categories form the database
     function get_categories()
     {
-        // get databse connection handler form $GLOBALS
         $dbh = $GLOBALS["dbh"];
 
         $result = $dbh->query("SELECT * FROM categories");
@@ -90,4 +87,12 @@
         return $categories;
     }
 
+    // get recently added products form the database
+    function get_recent()
+    {
+        $dbh = $GLOBALS["dbh"];
+
+        // get products from the database
+        //
+    }
 ?>
