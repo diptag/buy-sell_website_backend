@@ -104,27 +104,39 @@
         // use transaction to upload product data and get name to be used for image form the database
         $dbh->beginTransaction();
 
-        // get last product id
-        $result = $dbh->query("SELECT MAX(id) AS last FROM products");
-        $last_id = $result->fetch(PDO::FETCH_ASSOC);
-
-        // use last product id + 1 as product image name
-        $img_name = $last_id["last"] + 1;
 
         // prepare insert statement 
-        $stmt = $dbh->prepare("INSERT INTO products (name, description, image, price, category_id, user_id, datetime) VALUES (:name, :description, :img, :price, :category_id, {$_SESSION["id"]}, NOW())");
-
+        $stmt = $dbh->prepare("INSERT INTO products (name, description, price, category_id, user_id, datetime) VALUES (:name, :description, :price, :category_id, {$_SESSION["id"]}, NOW())");
+        
         // bind values
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":description", $description);
-        $stmt->bindParam(":img", $img_name.".".$img_ext);
         $stmt->bindParam(":price", $price);
         $stmt->bindParam("category_id", $category_id);
 
         // excecute statement
         if ($stmt->execute())
         {
-            // set status of insert true and commit 
+            // set status of insert true 
+            $status = true;
+        }
+        else
+        {
+            $status = false;
+        }
+        
+        // get product id
+        
+        // get last product id
+        $result = $dbh->query("SELECT MAX(id) AS last FROM products");
+        $id = $result->fetch(PDO::FETCH_ASSOC);
+
+        // create full image name
+        $img = $id["last"].".".$img_ext;
+        
+        // insert image name in database
+        if ($dbh->exec("UPDATE products SET image = '{$img}' WHERE id = {$id["last"]}"))
+        {
             $status = true;
             $dbh->commit();
         }
@@ -132,8 +144,8 @@
         {
             $status = false;
         }
-
+        
         // return image name and insert status
-        return ["status" => $status, "img_name" => $img_name];
+        return ["status" => $status, "img" => $img];
     }
 ?>
