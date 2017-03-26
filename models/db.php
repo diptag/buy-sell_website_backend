@@ -95,4 +95,44 @@
         // get products from the database
         //
     }
+
+    // function to upload new product data to the database
+    function upload_product($name, $description, $category_id, $price)
+    {
+        $dbh = $GLOBALS["dbh"];
+
+        // use transaction to upload product data and get name to be used for image form the database
+        $dbh->beginTransaction();
+
+        // get last product id
+        $result = $dbh->query("SELECT MAX(id) AS last FROM products");
+        $last_id = $result->fetch(PDO::FETCH_ASSOC);
+
+        // use last product id + 1 as product image name
+        $img_name = $last_id["last"] + 1;
+
+        // prepare insert statement 
+        $stmt = $dbh->prepare("INSERT INTO products (name, description, image, price, category_id, user_id, datetime) VALUES (:name, :description, '{$img_name}', :price, :category_id, {$_SESSION["id"]}, NOW())");
+
+        // bind values
+        $stmt->bindParam(":name", $name);
+        $stmt->bindParam(":description", $description);
+        $stmt->bindParam(":price", $price);
+        $stmt->bindParam("category_id", $category_id);
+
+        // excecute statement
+        if ($stmt->execute())
+        {
+            // set status of insert true and commit 
+            $status = true;
+            $dbh->commit();
+        }
+        else
+        {
+            $status = false;
+        }
+
+        // return image name and insert status
+        return ["status" => $status, "img_name" => $img_name];
+    }
 ?>
