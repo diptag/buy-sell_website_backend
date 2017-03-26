@@ -83,7 +83,7 @@
         $dbh = $GLOBALS["dbh"];
 
         $result = $dbh->query("SELECT * FROM categories");
-        $categories = fetch_All(PDO::FETCH_ASSOC);
+        $categories = $result->fetchAll(PDO::FETCH_ASSOC);
         return $categories;
     }
 
@@ -97,7 +97,7 @@
     }
 
     // function to upload new product data to the database
-    function upload_product($name, $description, $category_id, $price)
+    function upload_product($name, $description, $category_id, $price, $img_ext)
     {
         $dbh = $GLOBALS["dbh"];
 
@@ -112,11 +112,12 @@
         $img_name = $last_id["last"] + 1;
 
         // prepare insert statement 
-        $stmt = $dbh->prepare("INSERT INTO products (name, description, image, price, category_id, user_id, datetime) VALUES (:name, :description, '{$img_name}', :price, :category_id, {$_SESSION["id"]}, NOW())");
+        $stmt = $dbh->prepare("INSERT INTO products (name, description, image, price, category_id, user_id, datetime) VALUES (:name, :description, :img, :price, :category_id, {$_SESSION["id"]}, NOW())");
 
         // bind values
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":description", $description);
+        $stmt->bindParam(":img", $img_name.".".$img_ext);
         $stmt->bindParam(":price", $price);
         $stmt->bindParam("category_id", $category_id);
 
