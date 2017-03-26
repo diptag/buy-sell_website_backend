@@ -3,7 +3,16 @@
     // if user reached the page via GET (i.e. by clicking a linlk orredirect)
     if ($_SERVER["REQUEST_METHOD"] == "GET")
     {
-        render("login_form", ["title" => "Log In"]);
+        // check if user is not redirected from another page for logging in, e.g. from sell.php
+        if (!empty($_SESSION["login_msg"]))
+        {
+            // show user the msg to log in first 
+            render("login_form", ["title" => "Log In", "error_msg" => $_SESSION["login_msg"]]);
+        }
+        else
+        {
+            render("login_form", ["title" => "Log In"]);
+        }
     } 
     
     // id the user reached the page via POST (i.e. by submitting a form)
@@ -27,8 +36,20 @@
                 $_SESSION["id"] = $user["id"];
                 $_SESSION["name"] = $user["name"];
                 
-                // redirect to main.php
-                redirect("/");
+                // redirect
+                // if redirected from other page for log in 
+                if (!empty($_SESSION["login_msg"]))
+                {
+                    // get redirect page and set redirection parameters to null
+                    $redirect_page = $_SESSION["redirecting_page"];
+                    $_SESSION["redirecting_page"] = null;
+                    $_SESSION["login_msg"] = null;
+                    redirect("/".$redirect_page);
+                }
+                else
+                {
+                    redirect("/");
+                }
             }
             else
             {

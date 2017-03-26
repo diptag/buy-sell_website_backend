@@ -8,6 +8,10 @@
         // if user is not logged in
         if (empty($_SESSION["id"]))
         {
+            // set message to shown to the user in $_SESSION
+            $_SESSION["login_msg"] = "You need to login first.";
+            $_SESSION["redirecting_page"] = "sell";
+            
             // redirect to login page
             redirect("/login");
         }
