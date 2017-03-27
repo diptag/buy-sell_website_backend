@@ -3,7 +3,7 @@
     if (isset($msg))
     {
 ?>
-    <h2><?= $msg."  ".$_GET["id"] ?></h2>
+    <h2><?= $msg ?></h2>
 <?php
     }
     

@@ -18,6 +18,7 @@
         ?>
     </select><br>
     Price: Rs.<input type="number" name="price" min="0"><br>
-    Image: (Image should be of JPEG, JPG, PNG and GIF formats and size &lt; 1MB)<br><input type="file" name="image_upload" accept="image/jpeg, image/gif, image/x-png"><br>
+    Image: (Image should be of JPEG, JPG, PNG and GIF formats and size &lt; 1MB)<br>
+    <input type="file" name="image_upload"><br>
     <input type="submit">           
 </form>

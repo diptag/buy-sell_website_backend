@@ -42,8 +42,21 @@
         {
             render("sell_form", ["title" => "Sell a Product", "categories" => $categories, "error_msg" => "Upload a product image"]);
         }
+        
+        // check if the size if image is greater than 1mb
+        if ($_FILES["image_upload"]["size"] > 1024000)
+        {
+            render("sell_form", ["title" => "Sell a Product", "categories" => $categories, "error_msg" => "Image file too large"]);
+        }
 
+        /*
         // check if the uploaded file is image, is of specified image type 
+        $check = getimagesize($_FILES["image_upload"]["tmp_name"]);
+        if ($check === false)
+        {
+            render("sell_form", ["title" => "Sell a Product", "categories" => $categories, "error_msg" => "Invalid image type."]);    
+        }
+        */
         $allowedTypes = array(IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_GIF);
         $detectedType = exif_imagetype($_FILES["image_upload"]["tmp_name"]);
         if (!in_array($detectedType, $allowedTypes))
@@ -51,12 +64,6 @@
             render("sell_form", ["title" => "Sell a Product", "categories" => $categories, "error_msg" => "Invalid image type."]);
         }
 
-        // check if the size if image is greater than 1mb
-        if ($_FILES["image_upload"]["size"] > 1024000)
-        {
-            render("sell_form", ["title" => "Sell a Product", "categories" => $categories, "error_msg" => "Image file too large"]);
-        }
-        
         // get image extension
         $img_ext = pathinfo($_FILES["image_upload"]["name"], PATHINFO_EXTENSION);
 
@@ -76,9 +83,8 @@
         // mave image file from temporary diretory to img directory
         if (move_uploaded_file($_FILES["image_upload"]["tmp_name"], $img_dir.$img))
         {
-            // since img_name is also the product id
-            $product_id = $img_name;
-            redirect("/");
+            // redirect to the product view page of the uploaded product
+            redirect("/product?id=".$result["product_id"]);
         }
         else
         {

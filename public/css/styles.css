@@ -31,6 +31,7 @@
 	max-height: 100%;
 	border: thin solid #000000;
 	float: left;
+	padding: 10px;
 }
 
 #img-display img {

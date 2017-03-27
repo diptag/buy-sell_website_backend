@@ -146,7 +146,7 @@
         }
         
         // return image name and insert status
-        return ["status" => $status, "img" => $img];
+        return ["status" => $status, "img" => $img, "product_id" => $id["last"]];
     }
 
     // function to get product data for given product id
