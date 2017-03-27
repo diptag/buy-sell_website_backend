@@ -1,4 +1,8 @@
 /* CSS Document */
+#main {
+	margin: 10px 150px;
+}
+
 #items-display {
 	position: absolute;
 	width: 100%;
@@ -20,4 +24,24 @@
 #categories, .items {
 	position: relative;
 	border: thin solid #000000;
+}
+
+#img-display {
+	width: 40%;
+	max-height: 100%;
+	border: thin solid #000000;
+	float: left;
+}
+
+#img-display img {
+	width: 100%;
+}
+
+#img-display, #product-details {
+	margin: 20px 5px;
+}
+
+#product-details {
+	text-align: center;
+	font-size: 20px;
 }
