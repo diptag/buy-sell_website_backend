@@ -148,4 +148,20 @@
         // return image name and insert status
         return ["status" => $status, "img" => $img];
     }
+
+    // function to get product data for given product id
+    function get_product_data($id) 
+    {
+        $dbh = $GLOBALS["dbh"];
+
+        // prepare query, bind id and execute it
+        $stmt = $dbh->prepare("SELECT products.*, users.email, colleges.name AS college, categories.name AS category FROM products 
+        INNER JOIN users ON products.user_id = users.id INNER JOIN colleges ON users.college_id = colleges.id 
+        INNER JOIN categories ON products.category_id = categories.id WHERE products.id = :id"); 
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $product;
+    }
 ?>
