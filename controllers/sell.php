@@ -5,21 +5,8 @@
     // if user reached the page via GET (i.e. by clicking a link or redirect)
     if($_SERVER["REQUEST_METHOD"] == "GET") 
     {
-        // if user is not logged in
-        if (empty($_SESSION["id"]))
-        {
-            // set message to shown to the user in $_SESSION
-            $_SESSION["login_msg"] = "You need to login first.";
-            $_SESSION["redirecting_page"] = "sell";
-            
-            // redirect to login page
-            redirect("/login");
-        }
-        else
-        {
             // render sell_form
             render("sell_form", ["title" => "Sell a Product", "categories" => $categories]);
-        }
     }
     // if user reached the page via POST (i.e. by submitting a form)
     if ($_SERVER["REQUEST_METHOD"] == "POST")

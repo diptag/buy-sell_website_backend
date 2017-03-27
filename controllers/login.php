@@ -62,5 +62,4 @@
             render("login_form", ["title" => "Log In", "error_msg" => "User doesn't exists"]);
         }
     }
-    
 ?>
