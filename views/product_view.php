@@ -16,7 +16,7 @@
     </div><br>
     <div id="product-details">
         <h2><?= $product["name"] ?></h2>
-        Sold By: <?= $_SESSION["name"] ?><br>
+        Seller: <?= $product["user_name"] ?><br>
         Email: <?= $product["email"] ?><br><br>
         Category: <?= $product["category"] ?><br><br>
         Description: <?= $product["description"] ?><br><br>
