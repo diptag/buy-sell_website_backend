@@ -87,15 +87,6 @@
         return $categories;
     }
 
-    // get recently added products form the database
-    function get_recent()
-    {
-        $dbh = $GLOBALS["dbh"];
-
-        // get products from the database
-        //
-    }
-
     // function to upload new product data to the database
     function upload_product($name, $description, $category_id, $price, $img_ext)
     {
@@ -155,7 +146,7 @@
         $dbh = $GLOBALS["dbh"];
 
         // prepare query, bind id and execute it
-        $stmt = $dbh->prepare("SELECT products.*, users.email, colleges.name AS college, categories.name AS category FROM products 
+        $stmt = $dbh->prepare("SELECT products.*, users.name AS user_name, users.email, colleges.name AS college, categories.name AS category FROM products 
         INNER JOIN users ON products.user_id = users.id INNER JOIN colleges ON users.college_id = colleges.id 
         INNER JOIN categories ON products.category_id = categories.id WHERE products.id = :id"); 
         $stmt->bindParam(":id", $id);
@@ -163,5 +154,30 @@
         $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
         return $product;
+    }
+
+    // get recently added products of all categories or of a particular category from the database 
+    function get_recent_products($category_id = null) 
+    {
+        $dbh = $GLOBALS["dbh"];        
+            
+        // check if $category_id is passed as argument
+        if ($category_id === null)
+        {
+            // get recent additions of all categories
+            $result = $dbh->query("SELECT products.*, categories.name AS category FROM products INNER JOIN categories ON products.category_id = categories.id ORDER BY datetime DESC");
+            $products = $result->fetchAll(PDO::FETCH_ASSOC);
+        }
+        else
+        {
+            // get recent additions of the given category
+            $stmt = $dbh->prepare("SELECT products.*, categories.name AS category FROM products INNER JOIN categories ON products.category_id = categories.id 
+                WHERE products.category_id = :id ORDER BY datetime DESC");
+            $stmt->bindParam(":id", $category_id);
+            $stmt->execute();
+            $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        return $products;
     }
 ?>
