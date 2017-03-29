@@ -6,7 +6,7 @@ header {
 	background-color: #0D0C0C;
 	text-align: right;
 	color: #D3D3D3;
-	padding: 2px;
+	padding: 5px 0;
 }
 
 header a {
@@ -23,9 +23,49 @@ header a:hover {
 	margin: 5px 10px;
 }
 
+#dropdown {
+	float: right;
+	overflow: hidden;
+	margin-right: 100px;
+}
+
+#dropdown-btn {
+	padding: 5px 5px 10px 5px;
+}
+
+
+#dropdown-options {
+	display: none;
+	position: absolute;
+	min-width: 145px;
+	text-align: left;
+	-webkit-box-shadow: 0px 0px 5px;
+	box-shadow: 0px 0px 5px;
+	z-index: 1;
+}
+
+#dropdown-options a {
+	color: #000000;
+	display: block;
+	border-bottom: thin solid #BCBCBC;
+	padding: 10px;
+}
+
+#dropdown-options a:hover {
+	background-color: #E3E3E3;
+}
+
+#dropdown:hover #dropdown-btn {
+	color: #FFFFFF;
+}
+
+#dropdown:hover #dropdown-options {
+	display: block;
+}
+
 #main {
-	margin: 20px 8%;
-	width: 84%;
+	margin: 20px 0 20px 15%;
+	width: 85%;
 	float: left;
 }
 
