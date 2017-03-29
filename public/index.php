@@ -6,7 +6,7 @@
     if (isset($_GET["url"]))
         $url = $_GET["url"];
     else
-        $url = "main";
+        $url = "store";
 
     // use the required controller
     require("../controllers/".$url.".php");
