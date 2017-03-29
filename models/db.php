@@ -156,28 +156,39 @@
         return $product;
     }
 
-    // get recently added products of all categories or of a particular category from the database 
-    function get_recent_products($category_id = null) 
+    // function to get recently added products
+    function get_recent_products() 
     {
         $dbh = $GLOBALS["dbh"];        
             
-        // check if $category_id is passed as argument
-        if ($category_id === null)
+        $result = $dbh->query("SELECT products.*, categories.name AS category FROM products INNER JOIN categories ON products.category_id = categories.id ORDER BY datetime DESC");
+        $products = $result->fetchAll(PDO::FETCH_ASSOC);
+            
+        return $products;
+    }
+    
+    // fucntion to get products by category or college depending on the option provided
+    function get_products_by($option, $id)
+    {
+        $dbh = $GLOBALS["dbh"];
+        
+        // prepare query and bind value
+        if ($option === 1)
         {
-            // get recent additions of all categories
-            $result = $dbh->query("SELECT products.*, categories.name AS category FROM products INNER JOIN categories ON products.category_id = categories.id ORDER BY datetime DESC");
-            $products = $result->fetchAll(PDO::FETCH_ASSOC);
-        }
-        else
-        {
-            // get recent additions of the given category
+            // get priducts by category
             $stmt = $dbh->prepare("SELECT products.*, categories.name AS category FROM products INNER JOIN categories ON products.category_id = categories.id 
-                WHERE products.category_id = :id ORDER BY datetime DESC");
-            $stmt->bindParam(":id", $category_id);
-            $stmt->execute();
-            $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            WHERE products.category_id = :id ORDER BY datetime DESC");
         }
-
+        else if ($option === 2)
+        {  
+            // get products by college
+            $stmt = $dbh->prepare("SELECT products.*, categories.name AS category FROM products INNER JOIN categories ON 
+            products.category_id = categories.id WHERE products.user_id IN (SELECT id FROM users WHERE college_id = :id) ORDER BY datetime DESC");
+        }
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
         return $products;
     }
 ?>
