@@ -108,6 +108,23 @@ header a:hover {
 	border: thin solid #B8B8B8;
 	height: 300px;
 	float: left;
+	text-align: center;
+}
+
+.store-img {
+	margin: 10px;
+	height: 65%;
+	padding: 10px;
+	overflow: hidden;
+}
+
+.store-img img {
+	width: 100%;
+}
+
+#items a {
+	text-decoration: none;
+	color: #2A2A2A;
 }
 
 #items td:hover {

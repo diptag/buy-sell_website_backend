@@ -49,7 +49,14 @@
         <?php
                 }
         ?>
-                    <td></td>
+                    <td>
+                        <a href="product?id=<?= $product["id"] ?>">
+                            <div class="store-img"><img src="img/<?= $product["image"] ?>"></div>
+                            <strong><?= $product["name"] ?></strong><br>
+                            Category: <?= $product["category"] ?><br>
+                            Price: Rs. <?= $product["price"] ?>
+                        </a>    
+                    </td>
         <?php
                 if ($n/4 === 1)
                 {
