@@ -6,15 +6,20 @@
     $colleges = get_colleges();
 
     // check if category is specified or not 
-    if (empty($_GET["category"]))
+    if (empty($_GET["category"]) && empty($_GET["college"]))
     {
         // get recent addtions of all categories
         $products = get_recent_products();
     }
-    else
+    else if (empty($_GET["college"]))
     {
         // get recent additions of the given category
-        $products = get_recent_products($_GET["category"]);
+        $products = get_products_by(1, $_GET["category"]);
+    }
+    else
+    {
+        // get recent additons of the given college
+        $products = get_products_by(2, $_GET["college"]);
     }
 
     // render store view
