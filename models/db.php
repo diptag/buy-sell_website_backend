@@ -57,14 +57,20 @@
         $query->bindParam(":college", $college); 
         $query->bindParam(":hash", $hash);
 
-        // execute query
-        $status = $query->execute();
+        // execute query and return status
+        return $status = $query->execute();
+    }
+    
+    // function to get user's password only
+    function get_password()  
+    {
+        $dbh = $GLOBALS["dbh"];
         
-        // return insert status
-        if ($status)
-            return true;
-        else
-            return false;
+        // get password 
+        $result = $dbh->query("SELECT hash FROM users WHERE id = ".$_SESSION["id"]);
+        $hash = $result->fetch(PDO::FETCH_ASSOC);
+        
+        return $hash["hash"];
     }
     
     // function to change user password
@@ -73,7 +79,7 @@
         $dbh = $GLOBALS["dbh"];
 
         // prepare update statement and update password
-        $stmt = $dbh-prepare("UPDATE users SET hash = :newhash WHERE id = ".$_SESSION["id"]);
+        $stmt = $dbh->prepare("UPDATE users SET hash = :newhash WHERE id = ".$_SESSION["id"]);
         $stmt->bindParam(":newhash", password_hash($new, PASSWORD_DEFAULT));
         return $stmt->execute();
     }
@@ -126,8 +132,6 @@
         {
             $status = false;
         }
-        
-        // get product id
         
         // get last product id
         $result = $dbh->query("SELECT MAX(id) AS last FROM products");
