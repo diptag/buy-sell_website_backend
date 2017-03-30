@@ -67,6 +67,17 @@
             return false;
     }
     
+    // function to change user password
+    function update_password($new) 
+    {
+        $dbh = $GLOBALS["dbh"];
+
+        // prepare update statement and update password
+        $stmt = $dbh-prepare("UPDATE users SET hash = :newhash WHERE id = ".$_SESSION["id"]);
+        $stmt->bindParam(":newhash", password_hash($new, PASSWORD_DEFAULT));
+        return $stmt->execute();
+    }
+
     // function to get list of all colleges from the database
     function get_colleges() 
     {
