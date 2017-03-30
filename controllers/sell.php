@@ -36,14 +36,6 @@
             render("sell_form", ["title" => "Sell a Product", "categories" => $categories, "error_msg" => "Image file too large"]);
         }
 
-        /*
-        // check if the uploaded file is image, is of specified image type 
-        $check = getimagesize($_FILES["image_upload"]["tmp_name"]);
-        if ($check === false)
-        {
-            render("sell_form", ["title" => "Sell a Product", "categories" => $categories, "error_msg" => "Invalid image type."]);    
-        }
-        */
         $allowedTypes = array(IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_GIF);
         $detectedType = exif_imagetype($_FILES["image_upload"]["tmp_name"]);
         if (!in_array($detectedType, $allowedTypes))
@@ -58,9 +50,9 @@
         $result = upload_product($_POST["name"], $_POST["description"], $_POST["category_id"], $_POST["price"], $img_ext); 
 
         // if insert failed
-        if ($result["status"])
+        if (!$result["status"])
         {
-
+            render("msg", ["title" => "Sell a Product", "msg" => "Sorry! Prdoduct could not be uploaded. Some Unexpected error occurred."]);
         }
         
         // set image name and directory 
@@ -75,7 +67,9 @@
         }
         else
         {
-            
+            // remove product from the database and display error msg
+            remove_product($result["product_id"]);
+            render("msg", ["title" => "Sell a Product", "msg" => "Sorry! Prdoduct could not be uploaded. Some Unexpected error occurred."]);   
         }
 
     }

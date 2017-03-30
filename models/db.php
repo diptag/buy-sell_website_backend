@@ -154,6 +154,15 @@
         // return image name and insert status
         return ["status" => $status, "img" => $img, "product_id" => $id["last"]];
     }
+    
+    // function to remove product data from database
+    function remove_product($product_id)
+    {
+        $dbh = $GLOBALS["dbh"];
+        
+        // remove product
+        $dbh->query("DELETE FROM products WHERE id = ".$product_id);
+    }
 
     // function to get product data for given product id
     function get_product_data($id) 
