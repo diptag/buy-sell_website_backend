@@ -8,32 +8,35 @@
     <input type="submit" value="Search">      
 </form>
 <div id="items-display">
-    <div id="categories">
-        <h4>Categories</h4><hr>
-        <ul>
-        <?php
-            // set link to pages with products for each categories
-            foreach ($categories as $category)
-            {
-        ?>
-            <li><a href="store?category=<?= $category["id"] ?>"><?= $category["name"] ?></a></li>
-        <?php
-            }
-        ?>
-        </ul>
-        <hr><hr>
-        <h4>Colleges</h4><hr>
-        <ul>
-        <?php
-            // set link to pages wtih products posted by user from a particular college
-            foreach ($colleges as $college) 
-            {
-        ?>
-        <li><a href="store?college=<?= $college["id"] ?>"><?= $college["name"] ?></a></li>
-        <?php
-            }
-        ?>
-        </ul>
+    <div id="search-criterias">
+        <div class="criteria">
+            <h3>CATEGORIES</h3><hr>
+            <ul>
+            <?php
+                // set link to pages with products for each categories
+                foreach ($categories as $category)
+                {
+            ?>
+                <li><a href="store?category=<?= $category["id"] ?>"><?= $category["name"] ?></a></li>
+            <?php
+                }
+            ?>
+            </ul>
+        </div>
+        <div class="criteria">
+            <h3>COLLEGES</h3><hr>
+            <ul>
+            <?php
+                // set link to pages wtih products posted by user from a particular college
+                foreach ($colleges as $college) 
+                {
+            ?>
+            <li><a href="store?college=<?= $college["id"] ?>"><?= $college["name"] ?></a></li>
+            <?php
+                }
+            ?>
+            </ul>
+        </div>
     </div>
     <table id="items">
         <?php

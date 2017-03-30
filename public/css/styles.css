@@ -82,19 +82,35 @@ header a:hover {
 	margin: 20px 0;
 }
 
-#categories {
+#search-criterias {
 	width: 16%;
 	height: 80%;
 	float: left;
 	border: thin solid #000000;
+	border-radius: 10px;
 }
 
-#categories h {
-	margin: 0 auto;
+.criteria {
+	margin: 5px;
+	border: thin solid #000000;
+	border-radius: 10px;
 }
 
-#categories a {
+.criteria h3 {
+	text-align: center;
+}
+
+.criteria a {
 	text-decoration: none;
+	color: #565656;
+}
+
+.criteria a:hover {
+	text-decoration: underline;
+}
+
+.criteria li {
+	margin: 5px 0;
 }
 
 #items {
