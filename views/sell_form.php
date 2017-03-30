@@ -1,9 +1,11 @@
-<div id="error_msg">
-    <?php
-        if(isset($error_msg))
-            echo $error_msg;
-    ?>
-</div>
+ <?php
+    if (isset($error_msg))
+    {
+?>
+        <div class="error-msg"><?= $error_msg ?></div>
+<?php
+    }
+?>
 <form action="sell" method="POST" enctype="multipart/form-data">
     Name: <input type="text" name="name" required><br>
     Description: <textarea cols="30" rows="5" maxlength="255" name="description" required></textarea><br>

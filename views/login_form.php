@@ -3,7 +3,7 @@
         if (isset($error_msg))
         {
     ?>
-    <div id="error-msg"><?= $error_msg ?></div>
+    <div class="error-msg"><?= $error_msg ?></div>
     <?php
         }
     ?>
