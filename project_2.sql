@@ -16,6 +16,91 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categories` (
+  `id` int(2) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categories`
+--
+
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` VALUES (1,'Books'),(3,'Clothing'),(2,'Electronics'),(5,'Home & Furniture'),(4,'Sports'),(6,'Stationary'),(7,'Vehicles');
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `colleges`
+--
+
+DROP TABLE IF EXISTS `colleges`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `colleges` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `colleges`
+--
+
+LOCK TABLES `colleges` WRITE;
+/*!40000 ALTER TABLE `colleges` DISABLE KEYS */;
+INSERT INTO `colleges` VALUES (2,'Indian Institute of Technology Bombay'),(3,'Indian Institute of Technology Delhi'),(1,'Indian Institute of Technology Guwahati'),(4,'Indian Institute of Technology Kanpur'),(7,'Indian Institute of Technology Kharagpur'),(6,'Indian Institute of Technology Madras'),(5,'Indian Institute of Technology Roorkee');
+/*!40000 ALTER TABLE `colleges` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `products`
+--
+
+DROP TABLE IF EXISTS `products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `products` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `price` int(10) unsigned NOT NULL,
+  `category_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  `datetime` datetime NOT NULL,
+  `sold` char(1) NOT NULL DEFAULT 'n',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `products_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `products`
+--
+
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (1,'Hero Sprint Axis','2 years old. In good condition.','1.jpg',2999,7,4,'2017-03-27 13:04:56','n'),(4,'Whiteboard','Size: 2 feet x 1.5 feet\r\n2 years old.','4.jpg',200,6,4,'2017-03-27 18:12:38','n');
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -26,12 +111,13 @@ CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `institute` varchar(255) NOT NULL,
+  `college_id` int(10) unsigned NOT NULL,
   `hash` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
-  KEY `institute` (`institute`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `institute` (`college_id`),
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`college_id`) REFERENCES `colleges` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +126,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (4,'diptanshu@iitg.ernet.in','Diptanshu Agarwal',1,'$2y$10$6AXF2AHOiVRcLhbm8QBsruaWEjF5NL6it.FdD.zi3OnTxHExN6pY2'),(5,'a.shiledar@iitg.ernet.in','Ankur Shiledar',1,'$2y$10$aAVkFBxqGFiI3FN8Sj0rReebaFdXjwjmq5XRIviauKT7rHVwLhro6');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +139,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-13 18:06:38
+-- Dump completed on 2017-04-01 17:24:39
