@@ -38,6 +38,7 @@
             </ul>
         </div>
     </div>
+    <div id="search_head"><h2><?= $search_head ?></h2></div>
     <table id="items">
         <?php
             // display products
@@ -45,31 +46,27 @@
             foreach ($products as $product)
             {
                 // if it is a start of a new row
-                if ($n/4 === 1)
-                {
-        ?>
-                    <tr>
-        <?php
-                }
+                if ($n % 3 === 1)
+                    echo "<tr>";
         ?>
                     <td>
                         <a href="product?id=<?= $product["id"] ?>">
                             <div class="store-img"><img src="img/<?= $product["image"] ?>"></div>
                             <strong><?= $product["name"] ?></strong><br>
                             Category: <?= $product["category"] ?><br>
+                            College: <?= $product["college"] ?><br>
                             Price: Rs. <?= $product["price"] ?>
                         </a>    
                     </td>
         <?php
-                if ($n/4 === 1)
-                {
-        ?>
-                    </tr>
-        <?php
-                }
+                if ($n % 3 === 0)
+                    echo "</tr>";
+                    
                 // update variable
                 $n++;
             }
+            if (($n - 1) % 3 !== 0)
+             echo "</tr>";
         ?>
     </table>
 </div>
