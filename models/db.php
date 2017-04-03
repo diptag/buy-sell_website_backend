@@ -185,7 +185,9 @@
     {
         $dbh = $GLOBALS["dbh"];        
             
-        $result = $dbh->query("SELECT products.*, categories.name AS category FROM products INNER JOIN categories ON products.category_id = categories.id ORDER BY datetime DESC");
+        $result = $dbh->query("SELECT products.*, categories.name AS category, colleges.name AS college FROM products 
+        INNER JOIN categories ON products.category_id = categories.id INNER JOIN colleges ON 
+        colleges.id = (SELECT college_id FROM users WHERE users.id = products.user_id) ORDER BY datetime DESC");
         $products = $result->fetchAll(PDO::FETCH_ASSOC);
             
         return $products;
@@ -200,14 +202,18 @@
         if ($option === 1)
         {
             // get priducts by category
-            $stmt = $dbh->prepare("SELECT products.*, categories.name AS category FROM products INNER JOIN categories ON products.category_id = categories.id 
-            WHERE products.category_id = :id ORDER BY datetime DESC");
+            $stmt = $dbh->prepare("SELECT products.*, categories.name AS category, colleges.name AS college FROM products 
+            INNER JOIN categories ON products.category_id = categories.id INNER JOIN colleges ON colleges.id 
+            IN (SELECT college_id FROM users WHERE users.id = products.user_id) 
+            WHERE products.category_id = :id && products.sold = 'n' ORDER BY datetime DESC");
         }
         else if ($option === 2)
         {  
             // get products by college
-            $stmt = $dbh->prepare("SELECT products.*, categories.name AS category FROM products INNER JOIN categories ON 
-            products.category_id = categories.id WHERE products.user_id IN (SELECT id FROM users WHERE college_id = :id) ORDER BY datetime DESC");
+            $stmt = $dbh->prepare("SELECT products.*, categories.name AS category, colleges.name AS college FROM products 
+            INNER JOIN categories ON products.category_id = categories.id INNER JOIN colleges ON 
+            colleges.id = (SELECT college_id FROM users WHERE users.id = products.user_id) 
+            WHERE products.user_id IN (SELECT id FROM users WHERE users.college_id = :id) && products.sold = 'n' ORDER BY datetime DESC");
         }
         $stmt->bindParam(":id", $id);
         $stmt->execute();
