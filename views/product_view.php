@@ -17,6 +17,7 @@
     <div id="product-details">
         <h2><?= $product["name"] ?></h2>
         Seller: <?= $product["user_name"] ?><br>
+        College: <?= $product["college"] ?><br>
         Email: <?= $product["email"] ?><br><br>
         Category: <?= $product["category"] ?><br><br>
         Description: <?= $product["description"] ?><br><br>
