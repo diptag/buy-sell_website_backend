@@ -113,6 +113,10 @@ header a:hover {
 	margin: 5px 0;
 }
 
+#search_head {
+	padding-left: 250px;
+}
+
 #items {
 	float: right;
 	width: 80%;
@@ -128,9 +132,8 @@ header a:hover {
 }
 
 .store-img {
-	margin: 10px;
-	height: 65%;
-	padding: 10px;
+	margin: 15px 30px 10px 30px;
+	height: 55%;
 	overflow: hidden;
 }
 
