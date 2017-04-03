@@ -31,7 +31,7 @@
         }
         
         // check if the size if image is greater than 1mb
-        if ($_FILES["image_upload"]["size"] > 1536000)
+        if ($_FILES["image_upload"]["size"] > 1024000)
         {
             render("sell_form", ["title" => "Sell a Product", "categories" => $categories, "error_msg" => "Image file too large"]);
         }

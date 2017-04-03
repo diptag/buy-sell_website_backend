@@ -20,7 +20,7 @@
         ?>
     </select><br>
     Price: Rs.<input type="number" name="price" min="0" required><br>
-    Image: (Image should be of JPEG, JPG, PNG and GIF formats and size &lt; 1.5MB)<br>
+    Image: (Image should be of JPEG, JPG, PNG and GIF formats and size &lt; 1MB)<br>
     <input type="file" name="image_upload" required><br>
     <input type="submit">           
 </form>
