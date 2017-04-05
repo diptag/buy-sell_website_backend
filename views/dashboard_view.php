@@ -8,6 +8,7 @@
     else
     {
 ?>
+        <center><h2>My Products</h2></center>
         <table id="user-products">
             <tr>
                 <th>S. No.</th>

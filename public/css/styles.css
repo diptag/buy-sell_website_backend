@@ -70,7 +70,7 @@ header a:hover {
 }
 
 #main {
-	margin: 20px 0 20px 15%;
+	margin: 20px 10% 20px 10%;
 	width: 85%;
 	float: left;
 }
@@ -124,7 +124,7 @@ header a:hover {
 }
 
 #items td {
-	width: 25%;
+	width: 30%;
 	border: thin solid #B8B8B8;
 	height: 300px;
 	float: left;
@@ -132,7 +132,7 @@ header a:hover {
 }
 
 .store-img {
-	margin: 15px 30px 10px 30px;
+	margin: 15px 40px 10px 40px;
 	height: 55%;
 	overflow: hidden;
 }
