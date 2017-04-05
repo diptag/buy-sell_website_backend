@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="css/styles.css">
+<script src="js/jquery-3.2.0.min.js"></script>
+<script src="js/scripts.js"></script>
 <title><?= $title ?></title>
 </head>
 
