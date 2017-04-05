@@ -18,7 +18,7 @@
         	        <div id="dropdown">
             	        <div id="dropdown-btn">Hi! <?= $_SESSION["name"] ?></div>
             	        <div id="dropdown-options">
-                	        <a href="profile">My products</a>
+                	        <a href="dashboard">Dashboard</a>
                             <a href="change_password">Change Password</a>
                             <a href="logout">Log Out</a>
                         </div>
