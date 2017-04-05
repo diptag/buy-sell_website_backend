@@ -21,7 +21,7 @@
         Email: <?= $product["email"] ?><br><br>
         Category: <?= $product["category"] ?><br><br>
         Description: <?= $product["description"] ?><br><br>
-        Price: Rs.<?= $product["price"] ?>
+        Price: &#8377; <?= $product["price"] ?>
     </div>
 <?php
     }

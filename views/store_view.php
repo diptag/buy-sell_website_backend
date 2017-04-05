@@ -55,7 +55,7 @@
                             <strong><?= $product["name"] ?></strong><br>
                             Category: <?= $product["category"] ?><br>
                             College: <?= $product["college"] ?><br>
-                            Price: Rs. <?= $product["price"] ?>
+                            Price: &#8377; <?= $product["price"] ?>
                         </a>    
                     </td>
         <?php
