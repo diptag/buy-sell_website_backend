@@ -25,27 +25,12 @@
             ?>
                     <tr>
                         <td><?= $n ?></td>
-                        <td><?= $product["name"] ?></td>
+                        <td><a href="product?id=<?= $product["id"] ?>"><?= $product["name"] ?></a></td>
                         <td><?= $product["category"] ?></td>
                         <td>
-                            &#8377; <?= $product["price"] ?>
-                            
-                            <!-- Modal Code reference w3schools.com -->
+                            &#8377; <span><?= $product["price"] ?></span>
                             <!-- Trigger/Open Change Price Modal -->
-                            <button id="price-change-btn" class="modal-btn">Change Price</button>
-                                
-                            <!-- The Modal -->
-                            <div class="modal">
-                                <!-- Modal content -->
-                                <div id="price-change-modal" class="modal-content">
-                                    <span class="close">&times;</span>
-                                    Current Price: &#8377; <?= $product["price"] ?><br>
-                                    <form class="price-change">
-                                        New Price: &#8377; <input type="number" name="price" min="0" required><br>
-                                        <input type="submit" value="Change Price">
-                                    </form>
-                                </div>
-                            </div>
+                            <button class="modal-btn" value="<?= $product["id"] ?>">Change Price</button>
                         </td>
                         <td>
                         <?php
@@ -61,6 +46,20 @@
                 }
             ?>
         </table>
+        
+        <!-- Modal Code reference w3schools.com -->
+        <!-- The Modal -->
+        <div id="price-change-modal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span><br>
+                <form id="price-change-form">
+                    Current Price: &#8377; <input type="text" name="old_price" readonly><br>
+                    New Price: &#8377; <input type="number" name="new_price" min="0" required><br>
+                    <button type="submit" name="product_id">Change Price</button>
+                </form>
+            </div>
+        </div>
 <?php
     }
 ?>
