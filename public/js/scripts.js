@@ -1,9 +1,9 @@
 $(document).ready( function() {
-    
     // global variable for storing prodct id and price displayed
     var product_id;
-    var price
+    var price;
     
+    // open change price modal
     $(".modal-btn").click( function() {
         price = $(this).parent().children("span");
         product_id = $(this).val();
@@ -11,10 +11,12 @@ $(document).ready( function() {
         $("#price-change-modal").css("display", "block");
     });
     
+    // close the modal
     $(".close").click( function() {
         $("#price-change-modal").css("display", "none");
     });
     
+    // when update price form is submitted
     $("#price-change-form").submit( function() {
         var new_price = $(this).children("input[name=new_price]").val();
         
@@ -38,5 +40,39 @@ $(document).ready( function() {
                 }
             }
         });
+    });
+    
+    // when mark as sold button is clicked
+    $(".sold-btn").click( function() {
+        // get product id from button
+        product_id = $(this).val();
+        var status;
+        
+        // update product status using ajax
+        $.ajax({
+            url: "mark_sold",
+            data: {
+                product_id: product_id
+            },
+            async: false,
+            success: function(data) {
+                if (data.status === true) {
+                    // update status variable
+                    status = true;
+                }
+                else {
+                    status = false;
+                }
+            }
+        });
+        
+        if (status === true) {
+            // display sold status as yes in table and remove button
+            $(this).parent().text("Yes");
+            $(this).css("display", "none");
+        }
+        else {
+            alert("Couldn't update status. Some unexpected error occured.");
+        }
     });
 })

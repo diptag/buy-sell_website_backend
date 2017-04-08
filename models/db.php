@@ -240,12 +240,24 @@
         $stmt->bindParam(":new_price", $new_price);
         $stmt->bindParam(":product_id", $product_id);
         if ($stmt->execute())
-        {
             return true;
-        }
         else
-        {
             return false;
-        }
+    }
+    
+    // fucntion to update sold status
+    function update_status($product_id)
+    {
+        $dbh = $GLOBALS["dbh"];
+        
+        // prepare update statement
+        $stmt = $dbh->prepare("UPDATE products SET sold = 'y' WHERE id = :product_id");
+        
+        // bind product id and execute 
+        $stmt->bindParam(":product_id", $product_id);
+        if($stmt->execute())
+            return true;
+        else
+            return false;
     }
 ?>

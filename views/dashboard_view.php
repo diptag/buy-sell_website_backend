@@ -33,12 +33,20 @@
                             <button class="modal-btn" value="<?= $product["id"] ?>">Change Price</button>
                         </td>
                         <td>
-                        <?php
-                            if ($product["sold"] === 'n')
-                                echo "No";
-                            else 
-                                echo "Yes";
-                        ?>
+                            <span>
+                                <?php
+                                    if ($product["sold"] === 'n')
+                                    {
+                                ?>
+                                        <button class="sold-btn" value="<?= $product["id"] ?>">Mark As Sold</button>    
+                                <?php
+                                    }
+                                    else 
+                                    {
+                                        echo "Yes";
+                                    }
+                                ?>
+                            </span>
                         </td>
                     </tr>
             <?php
@@ -54,8 +62,8 @@
             <div class="modal-content">
                 <span class="close">&times;</span><br>
                 <form id="price-change-form">
-                    Current Price: &#8377; <input type="text" name="old_price" readonly><br>
-                    New Price: &#8377; <input type="number" name="new_price" min="0" required><br>
+                    Current Price: &#8377; <input type="text" name="old_price" readonly><br><br>
+                    New Price: &#8377; <input type="number" name="new_price" min="0" required><br><br>
                     <button type="submit" name="product_id">Change Price</button>
                 </form>
             </div>
