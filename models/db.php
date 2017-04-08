@@ -227,4 +227,25 @@
         
         return $products;
     }
+    
+    // function to update price
+    function update_price($product_id, $new_price)
+    {
+        $dbh = $GLOBALS["dbh"];
+        
+        // prepare update statement
+        $stmt = $dbh->prepare("UPDATE products SET price = :new_price WHERE id = :product_id");
+        
+        // bind values and execute 
+        $stmt->bindParam(":new_price", $new_price);
+        $stmt->bindParam(":product_id", $product_id);
+        if ($stmt->execute())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 ?>
