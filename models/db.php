@@ -41,15 +41,17 @@
     }
 
     // create register user function
-    function register_usr($email, $name, $college, $pwd)
+    function register_usr($details = array())
     {
         $dbh = $GLOBALS["dbh"];
+        
+        extract($details);
 
         // prepare sql statement
         $query = $dbh->prepare("INSERT INTO users (email, name, college_id, hash) VALUES (:email, :name, :college, :hash)");
 
         // create hash from password
-        $hash = password_hash($pwd, PASSWORD_DEFAULT);
+        $hash = password_hash($password, PASSWORD_DEFAULT);
 
         // bind parameters to the query
         $query->bindParam(":email", $email);
@@ -105,7 +107,7 @@
     }
 
     // function to upload new product data to the database
-    function upload_product($name, $description, $category_id, $price, $img_ext)
+    function upload_product($name, $description, $contact, $category_id, $price, $img_ext)
     {
         $dbh = $GLOBALS["dbh"];
 
@@ -114,11 +116,13 @@
 
 
         // prepare insert statement 
-        $stmt = $dbh->prepare("INSERT INTO products (name, description, price, category_id, user_id, datetime) VALUES (:name, :description, :price, :category_id, {$_SESSION["id"]}, NOW())");
+        $stmt = $dbh->prepare("INSERT INTO products (name, description, contact, price, category_id, user_id, datetime) 
+        VALUES (:name, :description, :contact, :price, :category_id, {$_SESSION["id"]}, NOW())");
         
         // bind values
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":description", $description);
+        $stmt->bindParam(":contact", $contact);
         $stmt->bindParam(":price", $price);
         $stmt->bindParam("category_id", $category_id);
 
@@ -170,8 +174,8 @@
         $dbh = $GLOBALS["dbh"];
 
         // prepare query, bind id and execute it
-        $stmt = $dbh->prepare("SELECT products.*, users.name AS user_name, users.email, colleges.name AS college, categories.name AS category FROM products 
-        INNER JOIN users ON products.user_id = users.id INNER JOIN colleges ON users.college_id = colleges.id 
+        $stmt = $dbh->prepare("SELECT products.*, users.name AS user_name, users.email, colleges.name AS college, categories.name 
+        AS category FROM products INNER JOIN users ON products.user_id = users.id INNER JOIN colleges ON users.college_id = colleges.id 
         INNER JOIN categories ON products.category_id = categories.id WHERE products.id = :id"); 
         $stmt->bindParam(":id", $id);
         $stmt->execute();

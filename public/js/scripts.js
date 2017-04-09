@@ -75,4 +75,20 @@ $(document).ready( function() {
             alert("Couldn't update status. Some unexpected error occured.");
         }
     });
+    
+    // function to disable price input box in sell form if donate is selected
+    $("input[type=radio][name=sell_type]").click( function() {
+        // check if button is checked
+        if ($(this).is(':checked')) {
+            // check which button is checked
+            if ($(this).val() === "donate") {
+                // disable price input box
+                $(this).siblings("input[type=number]").attr("disabled", "disabled");
+            }
+            else if ($(this).val() === "sell") {
+                //enable price input box
+                $(this).siblings("input[type=number]").removeAttr("disabled");
+            }
+        }
+    })
 })
