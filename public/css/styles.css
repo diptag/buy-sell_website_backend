@@ -84,7 +84,7 @@ header a:hover {
 }
 
 #search-criterias {
-	width: 16%;
+	width: 17%;
 	height: 80%;
 	float: left;
 	border: thin solid #000000;
@@ -95,6 +95,8 @@ header a:hover {
 	margin: 5px;
 	border: thin solid #000000;
 	border-radius: 10px;
+	max-height: 400px;
+	overflow-y: scroll;
 }
 
 .criteria h3 {
