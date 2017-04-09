@@ -18,6 +18,7 @@ $(document).ready( function() {
     
     // when update price form is submitted
     $("#price-change-form").submit( function() {
+        var sell_type = $(this).children("input[name=sell_type]:checked").val();
         var new_price = $(this).children("input[name=new_price]").val();
         
         // update the proce in database through ajax
@@ -25,18 +26,15 @@ $(document).ready( function() {
             url: "price_change",
             data: {
                 product_id: product_id,
+                sell_type: sell_type,
                 new_price: new_price
             },
             async: false,
             success: function(data) {
                 // check if price was changed or not 
-                if (data.status === true) {
-                    // change display price
-                    price.text(new_price);
-                }
-                else {
-                    // display error msg
-                    alert(data.error_msg);
+                if (data.status === false){
+                    // display error alert
+                    alert("Cannot update Price.");
                 }
             }
         });
@@ -90,5 +88,5 @@ $(document).ready( function() {
                 $(this).siblings("input[type=number]").removeAttr("disabled");
             }
         }
-    })
+    });
 })

@@ -16,12 +16,23 @@
     </div><br>
     <div id="product-details">
         <h2><?= $product["name"] ?></h2>
-        Seller: <?= $product["user_name"] ?><br>
-        College: <?= $product["college"] ?><br>
-        Email: <?= $product["email"] ?><br><br>
+        Seller Contact: <?= $product["contact"] ?><br>
+        College: <?= $product["college"] ?><br><br>
         Category: <?= $product["category"] ?><br><br>
         Description: <?= $product["description"] ?><br><br>
-        Price: &#8377; <?= $product["price"] ?>
+        Price:
+        <?php 
+            if (intval($product["price"]) === 0)
+            {
+                echo "On Donation";
+            }
+            else
+            {
+        ?>
+            &#8377; <?= $product["price"] ?>
+        <?php
+            }
+        ?>
     </div>
 <?php
     }

@@ -174,9 +174,9 @@
         $dbh = $GLOBALS["dbh"];
 
         // prepare query, bind id and execute it
-        $stmt = $dbh->prepare("SELECT products.*, users.name AS user_name, users.email, colleges.name AS college, categories.name 
-        AS category FROM products INNER JOIN users ON products.user_id = users.id INNER JOIN colleges ON users.college_id = colleges.id 
-        INNER JOIN categories ON products.category_id = categories.id WHERE products.id = :id"); 
+        $stmt = $dbh->prepare("SELECT products.*, colleges.name AS college, categories.name AS category FROM products INNER JOIN 
+        colleges ON colleges.id = (SELECT college_id FROM users WHERE users.id = products.user_id) INNER JOIN 
+        categories ON products.category_id = categories.id WHERE products.id = :id"); 
         $stmt->bindParam(":id", $id);
         $stmt->execute();
         $product = $stmt->fetch(PDO::FETCH_ASSOC);

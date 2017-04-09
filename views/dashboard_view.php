@@ -14,6 +14,7 @@
                 <th>S. No.</th>
                 <th>Title</th>
                 <th>Category</th>
+                <th>Contact</th>
                 <th>Price</th>
                 <th>Sold</th>
             </tr>
@@ -27,8 +28,21 @@
                         <td><?= $n ?></td>
                         <td><a href="product?id=<?= $product["id"] ?>"><?= $product["name"] ?></a></td>
                         <td><?= $product["category"] ?></td>
+                        <td><?= $product["contact"] ?></td>
                         <td>
-                            &#8377; <span><?= $product["price"] ?></span>
+                            
+                            <?php 
+                                if (intval($product["price"]) === 0)
+                                {
+                                    echo "On Donation";
+                                }
+                                else
+                                {
+                            ?>
+                                <span class="symbol">&#8377;</span> <span class="price-display"><?= $product["price"] ?></span>
+                            <?php
+                                }
+                            ?>
                             <!-- Trigger/Open Change Price Modal -->
                             <button class="modal-btn" value="<?= $product["id"] ?>">Change Price</button>
                         </td>
@@ -63,6 +77,7 @@
                 <span class="close">&times;</span><br>
                 <form id="price-change-form">
                     Current Price: &#8377; <input type="text" name="old_price" readonly><br><br>
+                    <input type="radio" name="sell_type" value="sell" checked>Sell <input type="radio" name="sell_type" value="donate">Donate<br>
                     New Price: &#8377; <input type="number" name="new_price" min="0" required><br><br>
                     <button type="submit" name="product_id">Change Price</button>
                 </form>

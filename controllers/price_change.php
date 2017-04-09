@@ -3,19 +3,35 @@
     header("Content-Type: application/json");
     
     // validate data received
-    if (empty($_GET["product_id"]) || empty($_GET["new_price"]))
+    if (empty($_GET["product_id"]) || empty($_GET["sell_type"]))
     {
         // send status false
         print(json_encode(["status" => false, "error_msg" => "All fields are mandatory."], JSON_PRETTY_PRINT));
         exit();
     }
     
-    if (intval($_GET["new_price"]) < 0)
-    {
-        // send status false
-        print(json_encode(["status" => false, "error_msg" => "Price should be greater than or equal to 0."], JSON_PRETTY_PRINT));
-        exit();   
-    }
+    // check wether user has selected donate or sell
+        if ($_GET["sell_type"] === "sell")
+        {
+            // check if user has enterd price or not
+            if (empty($_GET["new_price"]))
+            {
+                print(json_encode(["status" => false, "error_msg" => "All fields are mandatory."], JSON_PRETTY_PRINT));
+                exit();
+            }
+            // if user entered the price check if it is greater than 0 or not
+            else if (intval($_GET["new_price"]) <= 0)
+            {
+                // send status false
+                print(json_encode(["status" => false, "error_msg" => "Price should be greater than or equal to 0."], JSON_PRETTY_PRINT));
+                exit();
+            }
+        }
+        else if ($_GET["sell_type"] === "donate")
+        {
+            // set price to be 0
+            $_GET["new_price"] = 0;
+        }
     
     // update price in the database
     $result = update_price($_GET["product_id"], $_GET["new_price"]);

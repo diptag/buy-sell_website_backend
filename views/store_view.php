@@ -55,7 +55,19 @@
                             <strong><?= $product["name"] ?></strong><br>
                             Category: <?= $product["category"] ?><br>
                             College: <?= $product["college"] ?><br>
-                            Price: &#8377; <?= $product["price"] ?>
+                            Price:
+                                <?php 
+                                if (intval($product["price"]) === 0)
+                                {
+                                    echo "On Donation";
+                                }
+                                else
+                                {
+                            ?>
+                                &#8377; <?= $product["price"] ?>
+                            <?php
+                                }
+                            ?>
                         </a>    
                     </td>
         <?php

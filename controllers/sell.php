@@ -34,7 +34,7 @@
                 render("sell_form", ["title" => "Sell a Product", "categories" => $categories, "error_msg" => "Enter a valid price for product."]);
             }
         }
-        else if ($_POST["donate"])
+        else if ($_POST["sell_type"] === "donate")
         {
             // set price to be 0
             $_POST["price"] = 0;
