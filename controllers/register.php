@@ -42,6 +42,21 @@
             render("register_form", ["title" => "Register", "colleges" => $colleges, "error_msg" => "Password must be between 6 - 30 characters."]);
         }
         
+        // check if a valid college id is obatained
+        $flag = false;
+        foreach ($colleges as $college)
+        {
+            if ($_POST["category_id"] === $college["id"])
+            {
+                $flag = true;
+                break;
+            }
+        }
+        if ($flag === false)
+        {
+            render("sell_form", ["title" => "Sell a Product", "categories" => $categories, "error_msg" => "Select a valid college."]);   
+        }
+        
         // check if email is already registered and register user
         if (register_usr($_POST))
         {
