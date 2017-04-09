@@ -12,6 +12,7 @@
         <div class="criteria">
             <h3>CATEGORIES</h3><hr>
             <ul>
+                <li><a href="store">All</a></li>
             <?php
                 // set link to pages with products for each categories
                 foreach ($categories as $category)
@@ -26,6 +27,7 @@
         <div class="criteria">
             <h3>COLLEGES</h3><hr>
             <ul>
+                <li><a href="store">All</a></li>
             <?php
                 // set link to pages wtih products posted by user from a particular college
                 foreach ($colleges as $college) 
