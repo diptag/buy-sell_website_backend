@@ -10,6 +10,7 @@
     <input type="text" placeholder="Enter Name" name="name" required><br>
     <input type="email" placeholder="Enter Email" name="email" required><br>
     <select name="college">
+        <option value="0" selected disabled>--Select College--</option>
         <?php
             foreach ($colleges as $college)
             {
