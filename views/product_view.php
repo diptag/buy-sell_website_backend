@@ -33,6 +33,8 @@
         <?php
             }
         ?>
+        <br><br>
+        <a href="store?seller=<?= $product["user_id"] ?>">View other products from this user.</a>
     </div>
 <?php
     }

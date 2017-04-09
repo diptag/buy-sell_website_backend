@@ -198,7 +198,7 @@
     }
     
     // fucntion to get products by category or college or user depending on the option provided
-    function get_products_by($option, $id = null)
+    function get_products_by($option, $id)
     {
         $dbh = $GLOBALS["dbh"];
         
@@ -223,7 +223,7 @@
         {
             // get products by user_id
             $stmt = $dbh->prepare("SELECT products.*, categories.name AS category FROM products INNER JOIN categories 
-            ON products.category_id = categories.id WHERE products.user_id = ".$_SESSION["id"]." ORDER BY sold");
+            ON products.category_id = categories.id WHERE products.user_id = :id ORDER BY sold");
         }
         $stmt->bindParam(":id", $id);
         $stmt->execute();
