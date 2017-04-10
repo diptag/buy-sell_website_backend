@@ -9,5 +9,6 @@
     ?>
     <input type="email" placeholder="Enter Email" name="email" required><br>
     <input type="password" placeholder="Enter Password" name="password" required><br>
-    <input type="submit" value="Log In">
+    <input type="submit" value="Log In"><br><br>
+    Don't have a account - <a href="register">Register</a>
 </form>

@@ -57,6 +57,7 @@
                             <strong><?= $product["name"] ?></strong><br>
                             Category: <?= $product["category"] ?><br>
                             College: <?= $product["college"] ?><br>
+                            Date Added: <?= date("d/m/Y", strtotime($product["datetime"])) ?><br>
                             Price:
                                 <?php 
                                 if (intval($product["price"]) === 0)

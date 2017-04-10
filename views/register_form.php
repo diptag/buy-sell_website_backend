@@ -22,5 +22,6 @@
     </select><br>
     <input type="password" placeholder="Enter Password" name="password" required><br>
     <input type="password" placeholder="Re - Enter Password" name="password_2" required><br>
-    <input type="submit" value="Register">
+    <input type="submit" value="Register"><br><br>
+    Already have a account - <a href="login">Login</a>
 </form>
