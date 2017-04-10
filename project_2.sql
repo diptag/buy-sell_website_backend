@@ -27,7 +27,7 @@ CREATE TABLE `categories` (
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'Books'),(3,'Clothing'),(2,'Electronics'),(5,'Home & Furniture'),(4,'Sports'),(6,'Stationary'),(7,'Vehicles');
+INSERT INTO `categories` VALUES (1,'Books'),(3,'Clothing'),(2,'Electronics'),(5,'Home & Furniture'),(8,'Others'),(4,'Sports'),(6,'Stationary'),(7,'Vehicles');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,6 +76,7 @@ CREATE TABLE `products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
+  `contact` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   `price` int(10) unsigned NOT NULL,
   `category_id` int(10) unsigned NOT NULL,
@@ -87,7 +88,7 @@ CREATE TABLE `products` (
   KEY `category_id` (`category_id`),
   CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `products_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +97,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Hero Sprint Axis','2 years old. In good condition.','1.jpg',2999,7,4,'2017-03-27 13:04:56','n'),(4,'Whiteboard','Size: 2 feet x 1.5 feet\r\n2 years old.','4.jpg',200,6,4,'2017-03-27 18:12:38','n');
+INSERT INTO `products` VALUES (1,'Hero Sprint Axis','2 years old. In good condition.','diptanshu@iitg.ernet.in','1.jpg',2999,7,4,'2017-03-27 13:04:56','n'),(4,'Whiteboard','Size: 2 feet x 1.5 feet\r\n2 years old.','diptanshu@iitg.ernet.in','4.jpg',200,6,4,'2017-03-27 18:12:38','n'),(5,'Lab Coat','1 year old. In good condition.','diptanshu@iitg.ernet.in','5.jpg',200,3,4,'2017-04-05 17:48:27','n'),(6,'F&D W18BT Portable Bluetooth Speaker','Color: Black\r\n1 Year old. In good condition.','ronak@iitd.ac.in','6.jpg',700,2,6,'2017-04-09 09:50:48','n'),(7,'Casio Scientific Calculator fx-991es plus','2 years old. \r\nFully functional and in very good condition.','Mobile No.: 9876543210','7.jpg',599,2,7,'2017-04-09 16:27:57','n');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +118,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `email` (`email`),
   KEY `institute` (`college_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`college_id`) REFERENCES `colleges` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +127,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (4,'diptanshu@iitg.ernet.in','Diptanshu Agarwal',1,'$2y$10$6AXF2AHOiVRcLhbm8QBsruaWEjF5NL6it.FdD.zi3OnTxHExN6pY2'),(5,'a.shiledar@iitg.ernet.in','Ankur Shiledar',1,'$2y$10$aAVkFBxqGFiI3FN8Sj0rReebaFdXjwjmq5XRIviauKT7rHVwLhro6');
+INSERT INTO `users` VALUES (4,'diptanshu@iitg.ernet.in','Diptanshu Agarwal',1,'$2y$10$6AXF2AHOiVRcLhbm8QBsruaWEjF5NL6it.FdD.zi3OnTxHExN6pY2'),(5,'a.shiledar@iitg.ernet.in','Ankur Shiledar',1,'$2y$10$aAVkFBxqGFiI3FN8Sj0rReebaFdXjwjmq5XRIviauKT7rHVwLhro6'),(6,'ronak@iitd.ac.in','Ronak Agarwal',3,'$2y$10$EPxxI1rkZpPNyoPepEM3eey3PlhcFMSrSyV9msLF2iFg7.EtibOIq'),(7,'rohan.yadav@iitkgp.ac.in','Rohan Yadav',7,'$2y$10$pLTMfNmtTsje1qqfNcXDQOn6Ededj4fxzRGRhaUzmOWdQ8IU5baJW');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -139,4 +140,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-01 17:24:39
+-- Dump completed on 2017-04-10 19:43:10
