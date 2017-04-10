@@ -1,0 +1,1 @@
+<h3>Logged out successfully. <a href="login">Click here to log back in.</a></h3>

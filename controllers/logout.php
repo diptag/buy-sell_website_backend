@@ -11,6 +11,6 @@
     // destroy session
     session_destroy();
     
-    // redirect to store
-    redirect("/");
+    // display logged out succesfully
+    render("logout_view", ["title" => "Logged Out"]);
 ?>
