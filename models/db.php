@@ -264,4 +264,23 @@
         else
             return false;
     }
+    
+    // function to search databse for the kewwords obatined from search box
+    function search_products ($q)
+    {
+        $dbh = $GLOBALS["dbh"];
+        
+        // prepare sql query
+        $stmt = $dbh->prepare("SELECT products.*, categories.name AS category, colleges.name AS college FROM products
+        INNER JOIN categories ON categories.id = products.category_id INNER JOIN colleges ON 
+        colleges.id = (SELECT college_id FROM users WHERE products.user_id = users.id) WHERE products.name 
+        LIKE :q");
+        
+        // execute query while binding values and get products
+        $key = "%".$q."%";
+        $stmt->bindParam(":q", $key);
+        $stmt->execute();
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $products;
+    }
 ?>
