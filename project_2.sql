@@ -88,7 +88,7 @@ CREATE TABLE `products` (
   KEY `category_id` (`category_id`),
   CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `products_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +97,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Hero Sprint Axis','2 years old. In good condition.','diptanshu@iitg.ernet.in','1.jpg',2999,7,4,'2017-03-27 13:04:56','n'),(4,'Whiteboard','Size: 2 feet x 1.5 feet\r\n2 years old.','diptanshu@iitg.ernet.in','4.jpg',200,6,4,'2017-03-27 18:12:38','n'),(5,'Lab Coat','1 year old. In good condition.','diptanshu@iitg.ernet.in','5.jpg',200,3,4,'2017-04-05 17:48:27','n'),(6,'F&D W18BT Portable Bluetooth Speaker','Color: Black\r\n1 Year old. In good condition.','ronak@iitd.ac.in','6.jpg',700,2,6,'2017-04-09 09:50:48','n'),(7,'Casio Scientific Calculator fx-991es plus','2 years old. \r\nFully functional and in very good condition.','Mobile No.: 9876543210','7.jpg',599,2,7,'2017-04-09 16:27:57','n');
+INSERT INTO `products` VALUES (1,'Hero Sprint Axis','2 years old. In good condition.','diptanshu@iitg.ernet.in','1.jpg',2999,7,4,'2017-03-27 13:04:56','n'),(4,'Whiteboard','Size: 2 feet x 1.5 feet\r\n2 years old.','diptanshu@iitg.ernet.in','4.jpg',200,6,4,'2017-03-27 18:12:38','n'),(5,'Lab Coat','1 year old. In good condition.','diptanshu@iitg.ernet.in','5.jpg',200,3,4,'2017-04-05 17:48:27','n'),(6,'F&D W18BT Portable Bluetooth Speaker','Color: Black\r\n1 Year old. In good condition.','ronak@iitd.ac.in','6.jpg',700,2,6,'2017-04-09 09:50:48','n'),(7,'Casio Scientific Calculator fx-991es plus','2 years old. \r\nFully functional and in very good condition.','Mobile No.: 9876543210','7.jpg',599,2,7,'2017-04-09 16:27:57','n'),(8,'Logitech Z110 2.0 Stereo Speaker','2 Year old. In very good condition. Very good sound quality.','Mobile: 9871234567','8.jpg',599,2,6,'2017-04-11 05:13:30','n');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,4 +140,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-10 19:43:10
+-- Dump completed on 2017-04-11  5:27:56
