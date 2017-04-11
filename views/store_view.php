@@ -1,4 +1,4 @@
-<form action="store">
+<form action="store" id="search-box">
     <input type="search" name="q" placeholder="Search">
     <input type="submit" value="Search">      
 </form>

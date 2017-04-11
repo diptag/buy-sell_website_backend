@@ -76,6 +76,10 @@ header a:hover {
 	float: left;
 }
 
+#search-box input[type=search] {
+	width: 50%;
+}
+
 #items-display {
 	position: relative;
 	width: 100%;
