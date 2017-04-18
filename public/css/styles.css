@@ -6,7 +6,8 @@ header {
 	background-color: #0D0C0C;
 	text-align: right;
 	color: #D3D3D3;
-	padding: 5px 0;
+	padding: 10px 0;
+	min-height: 40px;
 }
 
 header a {
@@ -20,7 +21,7 @@ header a:hover {
 
 .nav-options{
 	display: inline-block;
-	margin: 5px 10px;
+	margin: 10px 10px;
 }
 
 #dropdown, #login-register {
@@ -30,18 +31,17 @@ header a:hover {
 }
 
 #login-register {
-	padding: 5px;
+	padding: 10px;
 	margin-left: 8px;
 }
 
 #dropdown-btn {
-	padding: 5px 5px 10px 5px;
+	padding: 10px;
 }
 
 
 #dropdown-options {
 	display: none;
-	background-color: #FFFFFF;
 	position: absolute;
 	min-width: 145px;
 	text-align: left;
@@ -68,6 +68,12 @@ header a:hover {
 
 #dropdown:hover #dropdown-options {
 	display: block;
+}
+
+#webiste-name {
+	float: left;
+	padding: 0 50px;
+	font-size: 32px;
 }
 
 #main {

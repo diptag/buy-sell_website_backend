@@ -191,7 +191,7 @@
             
         $result = $dbh->query("SELECT products.*, categories.name AS category, colleges.name AS college FROM products 
         INNER JOIN categories ON products.category_id = categories.id INNER JOIN colleges ON 
-        colleges.id = (SELECT college_id FROM users WHERE users.id = products.user_id) ORDER BY datetime DESC");
+        colleges.id = (SELECT college_id FROM users WHERE users.id = products.user_id) WHERE products.sold = 'n' ORDER BY datetime DESC");
         $products = $result->fetchAll(PDO::FETCH_ASSOC);
             
         return $products;

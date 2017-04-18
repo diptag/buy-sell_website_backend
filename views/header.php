@@ -11,6 +11,7 @@
 <body>
     <div id="wrapper">
         <header>
+            <a href="/" id="webiste-name"><b>collegekart.in</b></a>
             <?php 
                 // check if user is logged in
                 if (!empty($_SESSION["name"]))
